@@ -5,7 +5,7 @@ from tkinter import filedialog
 from tkinter.filedialog import asksaveasfilename
 
 def do_command():
-    command = ["ping", "localhost"]
+    command = ["ping", "tracert",'nslookup','netstat']
     # Windows version to limit to 4 requests: command = ["ping", "localhost", "-n", "4"]
     # Mac version to limit to 4 requests:     command = ["ping", "localhost", "-n", "4"]
     
@@ -19,6 +19,15 @@ frame.pack()
 # Makes the command button pass it's name to a function using lambda
 ping_btn = tk.Button(frame, text="Check to see if a URL is up and active", command=lambda:do_command("ping"))
 ping_btn.pack()
+
+tracert_btn = tk.Button(frame, text="Check Trace Route", command=lambda:do_command("tracert"))
+tracert_btn.pack()
+
+nslookup_btn = tk.Button(frame, text="Nslookup", command=lambda:do_command("nslookup"))
+nslookup_btn.pack()
+
+netstat_btn = tk.Button(frame, text="Network Status", command=lambda:do_command("netstat"))
+netstat_btn.pack()
 
 # creates the frame with label for the text box
 frame_URL = tk.Frame(root, pady=10,  bg="black") # change frame color
