@@ -5,8 +5,6 @@ from tkinter import filedialog
 from tkinter.filedialog import asksaveasfilename
 
 
-
-    
 def do_command(command):
     global command_textbox, url_entry
 
@@ -39,14 +37,29 @@ def mSave():
 root = tk.Tk()
 frame = tk.Frame(root)
 def run():
- global frame
+ global frame, var
  frame.pack()
+ var = 1
+ var +=1
+ print(var)
 
 
 # set up button to run the do_command function
-# Makes the command button pass it's name to a function using lambda
-ping_btn = tk.Button(frame, text="Check to see if a URL is up and active", command=lambda:do_command("ping"))
-ping_btn.pack()
+# Makes the command button pass it's name to a function using lambd
+choices = []
+listbox = tk.Listbox(frame, height=4, list=choices)
+listbox.insert(0, "ping")
+listbox.insert(1, "tracert")
+listbox.insert(2, "nslookup")
+listbox.insert(3, "netstat")
+'''
+list.bind("<<ping>>", lambda e: updateDetails(list.curselection()))
+list.bind("<Double-1>", lambda e: run(list.curselection()))
+'''
+listbox.pack()
+
+oneRingBtn = tk.Button(frame, text="Check to see if a URL is up and active", command=lambda:do_command("ping"))
+oneRingBtn.pack()
 
 tracert_btn = tk.Button(frame, text="Check Trace Route", command=lambda:do_command("tracert"))
 tracert_btn.pack()
