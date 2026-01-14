@@ -4,6 +4,9 @@ import tkinter.scrolledtext as tksc
 from tkinter import filedialog
 from tkinter.filedialog import asksaveasfilename
 
+
+
+    
 def do_command(command):
     global command_textbox, url_entry
 
@@ -31,10 +34,14 @@ def mSave():
   
   file.write(text_to_save)
   file.close()
-    
+
+
 root = tk.Tk()
 frame = tk.Frame(root)
-frame.pack()
+def run():
+ global frame
+ frame.pack()
+
 
 # set up button to run the do_command function
 # Makes the command button pass it's name to a function using lambda
@@ -53,12 +60,23 @@ netstat_btn.pack()
 save_btn = tk.Button(frame, text="Save", command=lambda:mSave())
 save_btn.pack()
 
+  # Adds an output box to GUI.
+command_textbox = tksc.ScrolledText(frame, height=10, width=100)
+command_textbox.pack()
+
+root = tk.Tk()
+frame2 = tk.Frame(root)
+frame2.pack()
+
+enter_btn = tk.Button(frame2, text="Enter URL",command=run())
+enter_btn.pack()
+
 # creates the frame with label for the text box
-frame_URL = tk.Frame(root, pady=10,  bg="black") # change frame color
-frame_URL.pack()
+frame2 = tk.Frame(root, pady=10,  bg="black") # change frame color
+frame2.pack()
 
 # decorative label
-url_label = tk.Label(frame_URL, text="Enter a URL of interest: ", 
+url_label = tk.Label(frame2, text="Enter a URL of interest: ", 
     compound="center",
     font=("comic sans", 14),
     bd=0, 
@@ -67,14 +85,9 @@ url_label = tk.Label(frame_URL, text="Enter a URL of interest: ",
     fg="mediumpurple3",
     bg="black")
 url_label.pack(side=tk.LEFT)
-url_entry= tk.Entry(frame_URL,  font=("comic sans", 14)) # change font
+url_entry= tk.Entry(frame2,  font=("comic sans", 14)) # change font
 url_entry.pack(side=tk.LEFT)
 
-frame = tk.Frame(root,  bg="black") # change frame color
-frame.pack()
-
-# Adds an output box to GUI.
-command_textbox = tksc.ScrolledText(frame, height=10, width=100)
-command_textbox.pack()
+ 
 
 root.mainloop()
