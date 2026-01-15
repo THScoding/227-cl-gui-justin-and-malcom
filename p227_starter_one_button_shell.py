@@ -42,6 +42,7 @@ def get_selected_item():
         selected_item = listbox.get(index)
         oneRingBtn = tk.Button(frame, text=selected_item, command=lambda:do_command(selected_item))
         oneRingBtn.pack()
+        print(s.get())
 
 
 root = tk.Tk()
@@ -74,6 +75,9 @@ save_btn.pack()
 command_textbox = tksc.ScrolledText(frame, height=10, width=100)
 command_textbox.pack()
 
+s = tk.Scale(frame, orient="horizontal", length=200, from_=1.0, to=100.0)
+s.pack()
+
 root = tk.Tk()
 frame2 = tk.Frame(root)
 frame2.pack()
@@ -98,6 +102,6 @@ url_label.pack(side=tk.LEFT)
 url_entry= tk.Entry(frame2,  font=("comic sans", 14)) # change font
 url_entry.pack(side=tk.LEFT)
 
- 
+
 
 root.mainloop()
