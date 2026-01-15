@@ -32,6 +32,16 @@ def mSave():
   
   file.write(text_to_save)
   file.close()
+def get_selected_item():
+    """Retrieves the currently selected item from the listbox and displays it in a message box."""
+    # Get the index of the selected item
+    selected_indices = listbox.curselection()
+    if selected_indices:
+        # Get the actual value using the index (curselection returns a tuple of indices)
+        index = selected_indices[0]
+        selected_item = listbox.get(index)
+        oneRingBtn = tk.Button(frame, text=selected_item, command=lambda:do_command(selected_item))
+        oneRingBtn.pack()
 
 
 root = tk.Tk()
@@ -51,24 +61,11 @@ listbox = tk.Listbox(frame, height=4, list=choices)
 listbox.insert(0, "ping")
 listbox.insert(1, "tracert")
 listbox.insert(2, "nslookup")
-listbox.insert(3, "netstat")
-'''
-list.bind("<<ping>>", lambda e: updateDetails(list.curselection()))
-list.bind("<Double-1>", lambda e: run(list.curselection()))
-'''
+listbox.insert(3, "ipconfig")
 listbox.pack()
 
-oneRingBtn = tk.Button(frame, text="Check to see if a URL is up and active", command=lambda:do_command("ping"))
-oneRingBtn.pack()
-
-tracert_btn = tk.Button(frame, text="Check Trace Route", command=lambda:do_command("tracert"))
-tracert_btn.pack()
-
-nslookup_btn = tk.Button(frame, text="Nslookup", command=lambda:do_command("nslookup"))
-nslookup_btn.pack()
-
-netstat_btn = tk.Button(frame, text="Network Status", command=lambda:do_command("netstat"))
-netstat_btn.pack()
+selection = tk.Button(root, text="Go", command=get_selected_item)
+selection.pack(pady=10)
 
 save_btn = tk.Button(frame, text="Save", command=lambda:mSave())
 save_btn.pack()
