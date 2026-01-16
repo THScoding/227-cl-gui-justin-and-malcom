@@ -1,11 +1,16 @@
 import subprocess
 import tkinter as tk
 import tkinter.scrolledtext as tksc
+import tkinter.font as tkf
 from tkinter import filedialog
 from tkinter.filedialog import asksaveasfilename
-
+#TODO: Make window stay the same size
+def change_text_size():
+  global font_size
+  scale_val =int(10 * round(s.get()/10)/10)
+  font_size=int(10+scale_val-1)
 def do_command(command):
-   global selected_item
+   global font_size
    if selected_item == "ipconfig":
      url_val = "/all"
    else:
@@ -16,7 +21,11 @@ def do_command(command):
         # url_val = "127.0.0.1"
         url_val = "::1"
     
+   change_text_size()
+   
    command_textbox.delete(1.0, tk.END)
+   command_textbox.configure(font=("Arial", int(font_size)))
+   
    command_textbox.insert(tk.END, command + " working....\n")
    command_textbox.update()
 
@@ -46,7 +55,6 @@ def get_selected_item():
         oneRingBtn.destroy() 
         oneRingBtn = tk.Button(frame, text=selected_item, command=lambda:do_command(selected_item))
         oneRingBtn.pack() 
-        print(s.get())
 selected_item = "ping"
 root = tk.Tk()
 frame = tk.Frame(root)
@@ -76,6 +84,8 @@ save_btn.pack()
 
   # Adds an output box to GUI.
 command_textbox = tksc.ScrolledText(frame, height=10, width=100)
+font_size = 10
+command_textbox.configure(font=("Arial", int(font_size)))
 
 command_textbox.pack()
 
